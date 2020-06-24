@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #7159c1;
+  --secondary-color: #f7df1d;
+}
+
+body,
+input,
+select,
+button {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+.header {
+  background-color: #fff;
+  width: 100%;
+  padding: 32px;
+  text-align: center;
+}
+
+.menu {
+  font-size: 22px;
+}
+
+.menu a {
+  display: inline-block;
+  text-decoration: none;
+  color: #777;
+  position: relative;
+}
+
+.menu a:last-child {
+  margin-left: 32px;
+}
+
+.menu a.active {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.menu a:hover {
+  color: var(--primary-color);
+}
+
+.menu a::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  transition: width 200ms ease-in-out;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+
+/* CARD */
+.card {
+  background-color: #fff;
+  width: 800px;
+  min-height: 400px;
+  margin: 45px auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.4);
+
+  animation: up 200ms ease;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* details */
+.details {
+  padding: 32px;
+}
+
+.details .item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 16px 0;
+}
+
+.details .item:last-child {
+  border: none;
+}
+
+.details h3,
+.details .item div:nth-child(1) {
+  font-size: 14px;
+  line-height: 24px;
+  color: #777;
+  letter-spacing: 0.7px;
+  font-weight: normal;
+}
+
+.details .item div:nth-child(2) {
+  color: #555;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.details h3 {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.details .item span {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--secondary-color);
+  border-radius: 16px;
+  color: #777;
+  margin-right: 4px;
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* FORM */
+input,
+select {
+  width: 100%;
+  outline: 0;
+  color: #555;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+input[type="radio"] {
+  width: initial;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+input::placeholder {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+button[type="submit"],
+a.button {
+  cursor: pointer;
+  padding: 8px 32px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 4px;
+  margin-top: 32px;
+  width: 100%;
+  font-size: 16px;
+}
+
+a.button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+#form-delete button[type="submit"] {
+  margin-top: 8px;
+  background-color: lightcoral;
+}
+
+/* INDEX INSTRUCTORS */
+.table-container {
+  display: block;
+  padding: 40px;
+}
+
+.table-container table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.table-container table th {
+  text-transform: uppercase;
+  text-align: left;
+  color: #777;
+  font-size: 14px;
+}
+
+.table-container table th:last-child,
+.table-container table td:last-child {
+  text-align: center;
+}
+
+.table-container table td,
+.table-container table th {
+  padding: 16px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.table-container table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-container table img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 16px;
+  border: 2px solid #fff;
+  box-shadow: 3px 1px 6px -4px #000;
+}
+
+.table-container tr td:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.table-container tr td:last-child a,
+.table-container > a {
+  background-color: var(--primary-color);
+  padding: 8px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.table-container > a {
+  display: inline-block;
+  margin-bottom: 16px;
+}
