@@ -1,5 +1,5 @@
 ## :muscle: Gym Academy
-Gerencie instrutores e membros da sua academia.
+Gerencie instrutores e membros da sua academia. :running:
 
 ![Preview](screenshot.png)
 
