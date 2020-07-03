@@ -37,7 +37,7 @@
         type="radio"
         name="gender" 
         value="M" 
-        {% if instructor.gender === 'M' %} checked {% endif %}
+        {% if not instructor.gender or instructor.gender === 'M' %} checked {% endif %}
       >
       Masculino
     </span>
