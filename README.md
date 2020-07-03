@@ -1,4 +1,5 @@
 ## :muscle: Gym Academy
+
 Gerencie instrutores e membros da sua academia. :running:
 
 ![Preview](screenshot.png)
@@ -9,14 +10,16 @@ Gerencie instrutores e membros da sua academia. :running:
 - [Nunjucks](https://mozilla.github.io/nunjucks/)
 
 ## :fire: Instalação
+
 ```bash
 $ git clone https://github.com/ClodoaldoDantas/gym-academy.git
-$ cd gym-academy
+$ cd gym-academy/final
 $ npm install
 $ npm run dev
 ```
 
 ### :mortar_board: Quem ministrou o projeto ?
+
 - [Mayk Brito](https://github.com/maykbrito)
 
 ---
