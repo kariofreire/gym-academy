@@ -3,7 +3,7 @@ const db = require("../../config/db");
 
 module.exports = {
   all(cb) {
-    const query = "SELECT * FROM instructors ORDER BY name ASC";
+    const query = "SELECT * FROM members ORDER BY name ASC";
     db.query(query, function (err, results) {
       if (err) throw `database error: ${err.message}`;
       cb(results.rows);
@@ -11,25 +11,28 @@ module.exports = {
   },
   create(data, cb) {
     const query = `
-      INSERT INTO instructors(
+      INSERT INTO members(
         name,
         avatar_url,
+        email,
         gender,
-        services,
         birth,
-        created_at
-      ) VALUES ($1, $2, $3, $4, $5, $6)
+        blood,
+        weight,
+        height
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING id
     `;
 
-    const { name, avatar_url, gender, services, birth } = data;
     const values = [
-      name,
-      avatar_url,
-      gender,
-      services,
-      date(birth).iso,
-      date(Date.now()).iso,
+      data.name,
+      data.avatar_url,
+      data.email,
+      data.gender,
+      date(data.birth).iso,
+      data.blood,
+      data.weight,
+      data.height,
     ];
 
     db.query(query, values, function (err, results) {
@@ -38,7 +41,7 @@ module.exports = {
     });
   },
   find(id, cb) {
-    const query = "SELECT * FROM instructors WHERE id = $1";
+    const query = "SELECT * FROM members WHERE id = $1";
     db.query(query, [id], function (err, results) {
       if (err) throw `database error: ${err.message}`;
       cb(results.rows[0]);
@@ -46,21 +49,27 @@ module.exports = {
   },
   update(data, cb) {
     const query = `
-      UPDATE instructors SET
-        avatar_url=($1),
-        name=($2),
-        birth=($3),
+      UPDATE members SET
+        name=($1),
+        avatar_url=($2),
+        email=($3),
         gender=($4),
-        services=($5)
-      WHERE id = $6
+        birth=($5),
+        blood=($6),
+        weight=($7),
+        height=($8)
+      WHERE id = $9
     `;
 
     const values = [
-      data.avatar_url,
       data.name,
-      data.birth,
+      data.avatar_url,
+      data.email,
       data.gender,
-      data.services,
+      date(data.birth).iso,
+      data.blood,
+      data.weight,
+      data.height,
       data.id,
     ];
 
@@ -70,7 +79,7 @@ module.exports = {
     });
   },
   delete(id, cb) {
-    const query = "DELETE FROM instructors WHERE id = $1";
+    const query = "DELETE FROM members WHERE id = $1";
     db.query(query, [id], function (err, results) {
       if (err) throw `database error: ${err.message}`;
       cb();
