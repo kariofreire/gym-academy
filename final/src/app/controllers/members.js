@@ -9,7 +9,9 @@ module.exports = {
     });
   },
   create(req, res) {
-    return res.render("members/create");
+    Member.instructorsSelectOptions(function (instructors) {
+      return res.render("members/create", { instructors });
+    });
   },
   post(req, res) {
     if (!validate(req.body)) return res.send("Please, fill all fields");
@@ -31,7 +33,10 @@ module.exports = {
     Member.find(req.params.id, function (member) {
       if (!member) return res.send("Member not found!");
       member.birth = date(member.birth).iso;
-      return res.render("members/edit", { member });
+
+      Member.instructorsSelectOptions(function (instructors) {
+        return res.render("members/edit", { member, instructors });
+      });
     });
   },
   put(req, res) {

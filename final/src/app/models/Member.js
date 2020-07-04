@@ -19,8 +19,9 @@ module.exports = {
         birth,
         blood,
         weight,
-        height
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        height,
+        instructor_id
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING id
     `;
 
@@ -33,6 +34,7 @@ module.exports = {
       data.blood,
       data.weight,
       data.height,
+      data.instructor,
     ];
 
     db.query(query, values, function (err, results) {
@@ -41,7 +43,12 @@ module.exports = {
     });
   },
   find(id, cb) {
-    const query = "SELECT * FROM members WHERE id = $1";
+    const query = `
+      SELECT members.*, instructors.name as instructor_name 
+      FROM members LEFT JOIN instructors 
+      on (members.instructor_id = instructors.id) 
+      WHERE members.id = $1
+    `;
     db.query(query, [id], function (err, results) {
       if (err) throw `database error: ${err.message}`;
       cb(results.rows[0]);
@@ -57,8 +64,9 @@ module.exports = {
         birth=($5),
         blood=($6),
         weight=($7),
-        height=($8)
-      WHERE id = $9
+        height=($8),
+        instructor_id=($9)
+      WHERE id = $10
     `;
 
     const values = [
@@ -70,6 +78,7 @@ module.exports = {
       data.blood,
       data.weight,
       data.height,
+      data.instructor,
       data.id,
     ];
 
@@ -83,6 +92,13 @@ module.exports = {
     db.query(query, [id], function (err, results) {
       if (err) throw `database error: ${err.message}`;
       cb();
+    });
+  },
+  instructorsSelectOptions(cb) {
+    const query = "SELECT id, name from instructors";
+    db.query(query, function (err, results) {
+      if (err) throw `database error: ${err.message}`;
+      cb(results.rows);
     });
   },
 };
