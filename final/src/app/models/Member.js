@@ -101,4 +101,37 @@ module.exports = {
       cb(results.rows);
     });
   },
+  paginate(params) {
+    const { filter, limit, offset, cb } = params;
+
+    let query = "";
+    let filterQuery = "";
+    let totalQuery = `(
+      SELECT count(*) FROM members
+    ) AS total`;
+
+    if (filter) {
+      filterQuery = `
+      WHERE members.name ILIKE '%${filter}%'
+      OR members.email ILIKE '%${filter}%'
+      `;
+
+      totalQuery = `(
+        SELECT count(*) FROM members
+        ${filterQuery}
+      ) AS total`;
+    }
+
+    query = `
+    SELECT members.*, ${totalQuery}
+    from members
+    ${filterQuery}
+    LIMIT $1 OFFSET $2
+    `;
+
+    db.query(query, [limit, offset], function (err, results) {
+      if (err) throw `database error: ${err.message}`;
+      cb(results.rows);
+    });
+  },
 };

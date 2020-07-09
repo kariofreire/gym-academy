@@ -4,9 +4,28 @@ const validate = require("../../lib/validate");
 
 module.exports = {
   index(req, res) {
-    Member.all(function (members) {
-      return res.render("members/index", { members });
-    });
+    const { filter } = req.query;
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 2;
+    const offset = limit * (page - 1);
+
+    const params = {
+      filter,
+      page,
+      limit,
+      offset,
+      cb(members) {
+        const total = members.length ? Math.ceil(members[0].total / limit) : 0;
+
+        return res.render("members/index", {
+          members,
+          filter,
+          total,
+        });
+      },
+    };
+
+    Member.paginate(params);
   },
   create(req, res) {
     Member.instructorsSelectOptions(function (instructors) {
