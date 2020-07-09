@@ -250,3 +250,29 @@ a.button {
   display: inline-block;
   margin-bottom: 16px;
 }
+
+/* FILTERS */
+.table-container__header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.table-container__header a,
+.table-container__header button[type="submit"] {
+  margin: 0;
+  width: 120px;
+}
+
+.table-container__header form {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  align-items: center;
+  grid-gap: 8px;
+}
+
+.table-container__header form input {
+  border: 1px solid #eee;
+  padding: 4px 8px;
+}
