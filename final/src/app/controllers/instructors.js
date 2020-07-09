@@ -5,17 +5,29 @@ const validate = require("../../lib/validate");
 module.exports = {
   index(req, res) {
     const { filter } = req.query;
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 2;
+    const offset = limit * (page - 1);
 
-    if(filter) {
-      Instructor.findBy(filter, function (instructors) {
-        return res.render("instructors/index", { instructors, filter });
-      });
-    } else {
-      Instructor.all(function (instructors) {
-        return res.render("instructors/index", { instructors });
-      });
-    }
+    const params = {
+      filter,
+      page,
+      limit,
+      offset,
+      cb(instructors) {
+        const total = instructors.length
+          ? Math.ceil(instructors[0].total / limit)
+          : 0;
 
+        return res.render("instructors/index", {
+          instructors,
+          filter,
+          total,
+        });
+      },
+    };
+
+    Instructor.paginate(params);
   },
   create(req, res) {
     return res.render("instructors/create");

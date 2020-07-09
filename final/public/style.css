@@ -276,3 +276,22 @@ a.button {
   border: 1px solid #eee;
   padding: 4px 8px;
 }
+
+/* PAGINATION */
+#pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#pagination a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+#pagination a:hover {
+  filter: brightness(0.3);
+}
+
+#pagination a + a {
+  margin-left: 16px;
+}
