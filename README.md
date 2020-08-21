@@ -2,7 +2,7 @@
 
 Gerencie instrutores e membros da sua academia. :running:
 
-![Preview](screenshot.png)
+![Preview](screenshot.svg)
 
 ## :rocket: Tecnologias
 
